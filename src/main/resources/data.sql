@@ -1,0 +1,6 @@
+INSERT INTO TOURIST VALUES (1,'2020-02-13','Poland','Marek','Notatka','Male','Smith');
+INSERT INTO TOURIST VALUES (2,'2013-02-13','Italy','Marko','Note','Male','Polo');
+INSERT INTO TOURIST VALUES (3,'2006-02-13','France','Alice','NoteAlice','Female','Great');
+
+INSERT INTO FLIGHT VALUES (1,'2020-02-13','2020-02-12',15,100);
+INSERT INTO FLIGHT VALUES (2,'2014-02-13','2014-02-12',22,888);

@@ -1,6 +1,7 @@
 package airport.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,8 @@ public class Flight {
     private LocalDate departure;
     private LocalDate arrival;
     private Integer numberOfSeat;
-    @ManyToMany(targetEntity = Tourist.class)
+    @OneToMany(cascade=CascadeType.ALL)
+    @Size(max = 16)
     private List<Tourist> touristList;
     private Integer ticketPrice;
 

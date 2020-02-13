@@ -17,7 +17,7 @@ public class Tourist {
     private String country;
     private String note;
     private LocalDate birthDate;
-    @ManyToMany(targetEntity = Flight.class)
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Flight> flightList;
 
     public Tourist() {
