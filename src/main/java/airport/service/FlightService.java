@@ -33,12 +33,13 @@ public class FlightService {
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
         List<Flight> flightList = new ArrayList<>();
-        List<Tourist> touristList = new ArrayList<>();
-        touristList.add(new Tourist("name2","surname2","sex2","country","note", LocalDate.now(),flightList));
-        touristList.add(new Tourist("name1","surname211","sex211","country","note", LocalDate.now(),flightList));
-        touristList.add(new Tourist("name1","surname211","sex211","country","note", LocalDate.now(),flightList));
 
-        Flight flight = new Flight(LocalDate.now(),LocalDate.now(),16,touristList,100);
+        List<Tourist> touristList = new ArrayList<>();
+        touristList.add(new Tourist("name2","surname2","sex2","country","note", LocalDate.now(),0));
+        touristList.add(new Tourist("name1","surname211","sex211","country","note", LocalDate.now(),0));
+        touristList.add(new Tourist("name1","surname211","sex211","country","note", LocalDate.now(),0));
+
+        Flight flight = new Flight(LocalDate.now(),LocalDate.now(),16,100);
 
 
         flightRepo.save(flight);
