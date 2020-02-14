@@ -1,15 +1,10 @@
 package airport.service;
 
-import airport.model.Flight;
 import airport.model.Tourist;
 import airport.repository.TouristRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +19,18 @@ public class TouristService {
 
     public List<Tourist> getAllTourists() {
         return touristRepo.findAll();
+    }
+
+    public List<Tourist> getByName(String name) {
+        return touristRepo.findByName(name);
+    }
+
+    public Tourist save(Tourist tourist) {
+        return touristRepo.save(tourist);
+    }
+
+    public void deleteById(Integer id) {
+        touristRepo.deleteById(id);
     }
 
 
