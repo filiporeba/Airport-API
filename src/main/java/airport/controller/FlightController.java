@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping()
 public class FlightController {
 
     private final FlightService flightService;
