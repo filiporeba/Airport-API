@@ -1,33 +1,55 @@
 package airport.controller;
 
 import airport.model.Flight;
+import airport.repository.FlightRepo;
 import airport.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping(value = "/flight")
 public class FlightController {
 
     private final FlightService flightService;
+    private final FlightRepo flightRepo;
 
     @Autowired
-    public FlightController(FlightService flightService) {
+    public FlightController(FlightService flightService, FlightRepo flightRepo) {
         this.flightService = flightService;
+        this.flightRepo = flightRepo;
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all")
     public List<Flight> getAll(){
-        return flightService.getAll();
+        return flightService.getFlightList();
     }
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Flight updateClient(@RequestBody @Valid Flight flight) {
-        return flightService.addFlight(flight);
+    @GetMapping(value = "/{id}")
+    public Flight getOneFlight(@PathVariable Integer id){
+        return flightService.getFlightById(id);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Flight updateFlight(@RequestBody @Valid Flight flight, @PathVariable Integer id) {
+        return flightRepo.findById(id)
+                .map(flight1 -> {
+                    flight1.setArrival(flight.getArrival());
+                    flight1.setDeparture(flight.getDeparture());
+                    flight1.setNumberOfSeat(flight.getNumberOfSeat());
+                    flight1.setTicketPrice(flight.getTicketPrice());
+                    return flightRepo.save(flight1);
+                })
+                .orElseGet(() -> {
+                    flight.setId(id);
+                    return flightRepo.save(flight);
+                });
+
     }
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -35,22 +57,11 @@ public class FlightController {
         return flightService.addFlight(flight);
     }
 
-//    JSON TO ADD
-//    {
-//        "departure": "2020-02-22",
-//            "arrival": "2020-02-22",
-//            "numberOfSeat": 16,
-//            "touristList": [
-//        {
-//            "name": "Filip",
-//                "surname": "Poreba",
-//                "sex": "Male",
-//                "country": "country",
-//                "note": "note",
-//                "birthDate": "2020-02-13",
-//                "flightList": []
-//        }
-//        ],
-//        "ticketPrice": 100
-//    }
+    @DeleteMapping(value = "/remove")
+    public ResponseEntity removeFlightById(@PathVariable Integer id) {
+        flightService.removeFlightById(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping(value = "/tourist")
 @RestController
@@ -90,7 +89,7 @@ public class TouristController {
         tourist.setFlightId(id);
         touristList.add(tourist);
 
-        Flight flightById = flightService.getOne(id);
+        Flight flightById = flightService.getFlightById(id);
         Lot newLot = new Lot(flightById,touristList);
 
         Lot lott = lotService.addLot(newLot);

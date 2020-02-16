@@ -10,6 +10,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class LotService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
-        Flight flight = new Flight(LocalDate.now(),LocalDate.now(),16,100);
+        Flight flight = new Flight(LocalDateTime.now(),LocalDateTime.now(),16,100);
         List<Tourist> touristList = new ArrayList<>();
         touristList.add(new Tourist("name2","surname2","sex2","country","note", LocalDate.now(),0));
         touristList.add(new Tourist("name222","surname222","sex222","country22","note22", LocalDate.now(),0));
