@@ -1,5 +1,6 @@
 package airport.controller;
 
+import airport.exception.FlightNotFoundException;
 import airport.model.Flight;
 import airport.repository.FlightRepo;
 import airport.service.FlightService;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/flight")
+@CrossOrigin
 public class FlightController {
 
     private final FlightService flightService;
@@ -32,7 +34,12 @@ public class FlightController {
 
     @GetMapping(value = "/{id}")
     public Flight getOneFlight(@PathVariable Integer id){
-        return flightService.getFlightById(id);
+        return flightService.getFlightById(id).orElseThrow(() -> new FlightNotFoundException(id));
+    }
+
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Flight addFlight(@RequestBody @Valid Flight flight) {
+        return flightService.addFlight(flight);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -46,21 +53,20 @@ public class FlightController {
                     return flightRepo.save(flight1);
                 })
                 .orElseGet(() -> {
-                    flight.setId(id);
+                    flight.setFlightId(id);
                     return flightRepo.save(flight);
                 });
-
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Flight addFlight(@RequestPart Flight flight) {
-        return flightService.addFlight(flight);
-    }
-
-    @DeleteMapping(value = "/remove")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity removeFlightById(@PathVariable Integer id) {
-        flightService.removeFlightById(id);
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+        if(flightService.getFlightById(id).isPresent()) {
+            flightService.removeFlightById(id);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
     }
 
 
