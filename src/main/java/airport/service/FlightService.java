@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -28,16 +29,14 @@ public class FlightService {
         return flightRepo.save(flight);
     }
 
-    public Flight getFlightById(Integer id) {
-        if(flightRepo.findById(id).isPresent())
-            return flightRepo.findById(id).get();
-        else
-            return null;
+    public Optional<Flight> getFlightById(Integer id) {
+        return flightRepo.findById(id);
     }
 
     public void removeFlightById(Integer id) {
         flightRepo.deleteById(id);
     }
+
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {

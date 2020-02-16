@@ -29,16 +29,19 @@ public class LotService {
         return lotRepo.findAll();
     }
 
-    public Lot showOne(Integer id) {
-        if(lotRepo.findById(id).isPresent())
-            return lotRepo.findById(id).get();
-        else
-            return null;
+    public Optional<Lot> getOneByID(Integer id) {
+        return lotRepo.findById(id);
     }
 
     public Lot addLot(Lot lot) {
         return lotRepo.save(lot);
     }
+
+    public void removeLotById(Integer id) {
+        lotRepo.deleteById(id);
+    }
+
+
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {

@@ -11,6 +11,7 @@ public class Tourist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "turysta", insertable = false, updatable = false)
     private Integer id;
     private String name;
     private String surname;

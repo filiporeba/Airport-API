@@ -34,7 +34,7 @@ public class TouristService {
         touristRepo.deleteById(id);
     }
 
-    public Optional<Tourist> findyById(Integer id) {
+    public Optional<Tourist> getOneById(Integer id) {
         return touristRepo.findById(id);
     }
 
