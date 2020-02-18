@@ -26,7 +26,7 @@ public class TouristService {
         return touristRepo.findByName(name);
     }
 
-    public Tourist save(Tourist tourist) {
+    public Tourist addTourist(Tourist tourist) {
         return touristRepo.save(tourist);
     }
 
