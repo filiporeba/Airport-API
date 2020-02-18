@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>interntask</artifactId>
+    <artifactId>airport</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>interntask</name>
-    <description>Demo project for Spring Boot</description>
+    <name>airport</name>
+    <description>Airport project</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -45,21 +45,26 @@
             </exclusions>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
 
-<!--         https://mvnrepository.com/artifact/mysql/mysql-connector-java-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
 
     </dependencies>
 

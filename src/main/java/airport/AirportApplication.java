@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InterntaskApplication {
+public class AirportApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(InterntaskApplication.class, args);
+        SpringApplication.run(AirportApplication.class, args);
     }
 
 }

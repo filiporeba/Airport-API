@@ -47,7 +47,7 @@ public class TouristController {
 
     @PostMapping(value = "/add")
     public Tourist addTourist(@RequestBody @Valid Tourist tourist) {
-        return touristService.save(tourist);
+        return touristService.addTourist(tourist);
     }
 
     @PostMapping(value = "/lot/{id}")
